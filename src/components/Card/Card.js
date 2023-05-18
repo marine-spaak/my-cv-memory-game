@@ -9,12 +9,6 @@ function Card({
 }) {
   const dispatch = useDispatch();
 
-  // const [isCardVisible, setIsCardVisible] = useState(false);
-
-  // const flipCard = () => {
-  //   setIsCardVisible(!isCardVisible);
-  // };
-
   const handleFirstClickOnCard = () => {
     dispatch(addCardToSelectionList(cardId, pairId));
   };
@@ -23,7 +17,7 @@ function Card({
     console.log('cannot reclick sorry');
   };
 
-  console.log(cardId, label, pairId, isSelected);
+  // console.log(cardId, label, pairId, isSelected);
 
   return (
     <div className="Card">
@@ -37,13 +31,13 @@ function Card({
         >
           <div className="Card-front">
             <p className="Card-label">{label}</p>
-            <p className="Card-id">{cardId}</p>
+            {/* <p className="Card-id">{cardId}</p> */}
             The front
           </div>
 
           <div className="Card-back">
             <p className="Card-label">{label}</p>
-            <p className="Card-id">{cardId}</p>
+            {/* <p className="Card-id">{cardId}</p> */}
             The back
           </div>
 

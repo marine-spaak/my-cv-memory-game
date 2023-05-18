@@ -1,10 +1,14 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 import './Cards.scss';
 
 import Card from '../Card/Card';
+import { flipAllCardsToBackSide } from '../../actions/actions';
 
 function Cards({ cards }) {
+  const dispatch = useDispatch();
+
   // J'importe depuis le state la liste des cartes sélectionnées
   const selectedCardsFromState = useSelector((state) => state.selectedCards);
 
@@ -13,18 +17,23 @@ function Cards({ cards }) {
   // false sinon
 
   const checkIfSelected = (thisCardId) => {
-    selectedCardsFromState.some((card) => card.id === thisCardId);
+    const newArray = selectedCardsFromState.filter((card) => (card.id === thisCardId));
+    if (newArray.length > 0) {
+      return true;
+    }
+    if (newArray.length === 0) {
+      return false;
+    }
   };
 
-  console.log(checkIfSelected(1));
+  const hasPickedTwoCards = useSelector((state) => state.hasPickedTwoCards);
 
-  // const hasPickedTwoCards = useSelector((state) => state.hasPickedTwoCards);
-
-  // useEffect(() => {
-  //   if (hasPickedTwoCards) {
-  //     console.log('Là il faut retourner toutes les cartes');
-  //   }
-  // }, [hasPickedTwoCards]);
+  useEffect(() => {
+    if (hasPickedTwoCards) {
+      console.log('Là il faut retourner toutes les cartes');
+      dispatch(flipAllCardsToBackSide());
+    }
+  }, [hasPickedTwoCards]);
 
   return (
     <div className="Cards">

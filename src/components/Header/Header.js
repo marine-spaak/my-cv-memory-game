@@ -16,9 +16,8 @@ function Header() {
   return (
     <div className="Header">
       <h1 className="Header-title">Mon CV en mémory</h1>
-      <button type="button" onClick={displaySelectedCards}>afficher les cartes sélectionnées</button>
       <p>Avez-vous trouvé deux cartes identiques ?</p>
-      <p>{(hasFoundPair) ? 'Oui !' : 'Non'}</p>
+      <p className="Header-result">{(hasFoundPair) ? 'Oui !' : 'Non'}</p>
     </div>
   );
 }

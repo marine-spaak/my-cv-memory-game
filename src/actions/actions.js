@@ -15,3 +15,8 @@ export const removeCardFromSelectionList = (cardId, pairId) => ({
     pairId: pairId,
   },
 });
+
+export const FLIP_ALL_CARDS_TO_BACK_SIDE = 'FLIP_ALL_CARDS_TO_BACK_SIDE';
+export const flipAllCardsToBackSide = () => ({
+  type: FLIP_ALL_CARDS_TO_BACK_SIDE,
+});

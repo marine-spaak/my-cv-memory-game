@@ -1,5 +1,5 @@
 import {
-  ADD_CARD_TO_SELECTION_LIST,
+  ADD_CARD_TO_SELECTION_LIST, FLIP_ALL_CARDS_TO_BACK_SIDE,
 } from '../actions/actions';
 
 const initialState = {
@@ -33,6 +33,17 @@ function reducer(state = initialState, action = {}) {
     //     previousPairId: state.currentPairId,
     //     currentPairId: action.payload.pairId,
     //   };
+
+    case FLIP_ALL_CARDS_TO_BACK_SIDE:
+
+      return {
+        ...state,
+        selectedCards: [],
+        previousPairId: -1,
+        currentPairId: 0,
+        hasFoundPair: false,
+        hasPickedTwoCards: false,
+      };
 
     default:
       return state;
