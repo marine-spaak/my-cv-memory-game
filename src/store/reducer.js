@@ -23,7 +23,7 @@ function reducer(state = initialState, action = {}) {
         }],
         previousPairId: state.currentPairId,
         currentPairId: action.payload.pairId,
-        hasPickedTwoCards: (state.selectedCards.length === 2),
+        hasPickedTwoCards: (state.selectedCards.length === 1),
       };
 
     // case REMOVE_CARD_FROM_SELECTION_LIST:

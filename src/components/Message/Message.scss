@@ -1,0 +1,21 @@
+@use '../../styles/vars';
+
+.Message {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: rgb(241, 255, 219);
+  height: 150px;
+  display: inline-block;
+  justify-content: center;
+
+  &-result {
+    margin: auto;
+    background-color: pink;
+    padding: 1rem;
+    margin: 1rem 0;
+    width: 100px;
+    border-radius: 20px;
+    display: inline-block;
+    justify-content: center;
+  }
+}

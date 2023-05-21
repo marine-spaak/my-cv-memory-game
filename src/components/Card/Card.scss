@@ -26,13 +26,13 @@
 
   &-front {
     backface-visibility: hidden;
-    background-color: lightgrey;
+    background-color: rgb(211, 211, 211);
     color: darkgrey;
   }
 
   &-back {
     backface-visibility: hidden;
-    background-color: pink;
+    background-color: rgba(255, 192, 203, .5);
     color: black;
     transform: rotateX(180deg);
   }
@@ -44,4 +44,10 @@
 
 .active {
   transform: rotateX(180deg);
+}
+
+.Card img {
+  margin-top: 1rem;
+  max-width: 100%;
+  max-height: 60%;
 }

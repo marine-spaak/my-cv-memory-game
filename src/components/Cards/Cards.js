@@ -27,11 +27,18 @@ function Cards({ cards }) {
   };
 
   const hasPickedTwoCards = useSelector((state) => state.hasPickedTwoCards);
+  const hasFoundPair = useSelector((state) => state.hasFoundPair);
 
   useEffect(() => {
+    console.log(hasPickedTwoCards, hasFoundPair);
     if (hasPickedTwoCards) {
-      console.log('Là il faut retourner toutes les cartes');
-      dispatch(flipAllCardsToBackSide());
+      if (hasFoundPair) {
+        console.log('Là il faut ajouter la paire trouvée à la liste des wins');
+      }
+      else {
+        console.log('Là il faut retourner toutes les cartes');
+        dispatch(flipAllCardsToBackSide());
+      }
     }
   }, [hasPickedTwoCards]);
 
@@ -41,6 +48,8 @@ function Cards({ cards }) {
         <Card
           key={index}
           label={card.label}
+          pictureName={card.pictureName}
+          pictureSrc={card.pictureSrc}
           cardId={index}
           pairId={card.pairId}
           isSelected={checkIfSelected(index)}

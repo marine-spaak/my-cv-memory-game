@@ -3,6 +3,7 @@ import './App.scss';
 import cardsData from '../../assets/data/cardsData';
 
 import Header from '../Header/Header';
+import Message from '../Message/Message';
 import Cards from '../Cards/Cards';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <Message />
       <Cards
         cards={shuffledCards}
       />
