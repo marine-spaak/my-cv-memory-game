@@ -7,7 +7,8 @@ const initialState = {
   previousPairId: -1,
   currentPairId: 0,
   hasFoundPair: false,
-  hasPickedTwoCards: false,
+  // hasPickedTwoCards: false,
+  // isPickingThirdCard: false,
 };
 
 function reducer(state = initialState, action = {}) {
@@ -23,16 +24,9 @@ function reducer(state = initialState, action = {}) {
         }],
         previousPairId: state.currentPairId,
         currentPairId: action.payload.pairId,
-        hasPickedTwoCards: (state.selectedCards.length === 1),
+        // hasPickedTwoCards: (state.selectedCards.length === 1),
+        // isPickingThirdCard: (state.selectedCards.length === 3),
       };
-
-    // case REMOVE_CARD_FROM_SELECTION_LIST:
-    //   return {
-    //     ...state,
-    //     selectedCards: state.selectedCards.filter((card) => (card.id !== action.payload.cardId)),
-    //     previousPairId: state.currentPairId,
-    //     currentPairId: action.payload.pairId,
-    //   };
 
     case FLIP_ALL_CARDS_TO_BACK_SIDE:
 
@@ -42,7 +36,8 @@ function reducer(state = initialState, action = {}) {
         previousPairId: -1,
         currentPairId: 0,
         hasFoundPair: false,
-        hasPickedTwoCards: false,
+        // hasPickedTwoCards: (state.selectedCards.length === 2),
+        // isPickingThirdCard: (state.selectedCards.length === 3),
       };
 
     default:

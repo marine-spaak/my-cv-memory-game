@@ -1,8 +1,6 @@
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import './Card.scss';
-import { addCardToSelectionList } from '../../actions/actions';
 
 // Import des images
 import picturePair1 from 'src/assets/pictures/pair-picture-1.png';
@@ -11,6 +9,8 @@ import picturePair3 from 'src/assets/pictures/pair-picture-3.png';
 import picturePair4 from 'src/assets/pictures/pair-picture-4.png';
 import picturePair5 from 'src/assets/pictures/pair-picture-5.png';
 import picturePair6 from 'src/assets/pictures/pair-picture-6.png';
+
+import { addCardToSelectionList } from '../../actions/actions';
 
 const imagesNames = {
   picturePair1,
@@ -22,7 +22,7 @@ const imagesNames = {
 };
 
 function Card({
-  cardId, label, pictureName, pictureSrc, pairId, isSelected,
+  cardId, label, pictureName, pairId, isSelected,
 }) {
   const dispatch = useDispatch();
   const handleFirstClickOnCard = () => {
@@ -33,10 +33,10 @@ function Card({
     console.log('cannot reclick sorry');
   };
 
-  // console.log(cardId, label, pairId, isSelected);
-
   return (
-    <div className="Card">
+    <div
+      className="Card"
+    >
       <div className="Card-container">
 
         <div
@@ -47,7 +47,7 @@ function Card({
         >
           <div className="Card-front">
             <p className="Card-label">{label}</p>
-            {/* <p className="Card-id">{cardId}</p> */}
+            <p className="Card-id">{cardId}</p>
             <p>The front</p>
           </div>
 
@@ -61,7 +61,7 @@ function Card({
             }}
           >
             <p className="Card-label">{label}</p>
-            {/* <p className="Card-id">{cardId}</p> */}
+            <p className="Card-id">{cardId}</p>
             The back
           </div>
 

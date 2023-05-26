@@ -11,7 +11,9 @@ function App() {
   const shuffledCards = doubleCards.sort(() => Math.random() - 0.5);
 
   return (
-    <div className="App">
+    <div
+      className="App"
+    >
       <Header />
       <Message />
       <Cards

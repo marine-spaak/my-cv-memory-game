@@ -26,24 +26,35 @@ function Cards({ cards }) {
     }
   };
 
-  const hasPickedTwoCards = useSelector((state) => state.hasPickedTwoCards);
   const hasFoundPair = useSelector((state) => state.hasFoundPair);
+  // console.log('Has Found a Pair ? ', hasFoundPair);
 
-  useEffect(() => {
-    console.log(hasPickedTwoCards, hasFoundPair);
-    if (hasPickedTwoCards) {
-      if (hasFoundPair) {
-        console.log('Là il faut ajouter la paire trouvée à la liste des wins');
-      }
-      else {
-        console.log('Là il faut retourner toutes les cartes');
-        dispatch(flipAllCardsToBackSide());
-      }
-    }
-  }, [hasPickedTwoCards]);
+  const hasPickedTwoCards = (selectedCardsFromState.length >= 2);
+  // console.log('Has Picked Two Cards ? ', hasPickedTwoCards);
+
+  // useEffect(() => {
+  //   console.log(hasPickedTwoCards, hasFoundPair);
+  //   if (hasPickedTwoCards) {
+  //     if (hasFoundPair) {
+  //       console.log('Là il faut ajouter la paire trouvée à la liste des wins');
+  //     }
+  //     else {
+  //       console.log('Là il faut retourner toutes les cartes');
+  //       dispatch(flipAllCardsToBackSide());
+  //     }
+  //   }
+  // }, [hasPickedTwoCards]);
 
   return (
-    <div className="Cards">
+    <div
+      className="Cards"
+      onClick={(event) => {
+        if (hasPickedTwoCards) {
+          console.log(event);
+          dispatch(flipAllCardsToBackSide());
+        }
+      }}
+    >
       {cards.map((card, index) => (
         <Card
           key={index}
