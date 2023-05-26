@@ -10,6 +10,14 @@ function App() {
   const doubleCards = [...cardsData, ...cardsData];
   const shuffledCards = doubleCards.sort(() => Math.random() - 0.5);
 
+  // Modifier shuffledCards pour que chaque card reçoive en id sa position dans le tableau
+  const shuffledCardsWithId = shuffledCards.map((card, index) => (
+    {
+      ...card,
+      id: index,
+    }
+  ));
+
   return (
     <div
       className="App"
@@ -17,7 +25,7 @@ function App() {
       <Header />
       <Message />
       <Cards
-        cards={shuffledCards}
+        cards={shuffledCardsWithId}
       />
     </div>
   );

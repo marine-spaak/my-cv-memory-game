@@ -51,3 +51,13 @@
   max-width: 100%;
   max-height: 60%;
 }
+
+.already-won {
+  display: none;
+}
+
+.isInWonList {
+  background-color: pink;
+  width: 200px;
+  height: 200px;
+}

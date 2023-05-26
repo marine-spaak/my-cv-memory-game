@@ -22,7 +22,7 @@ const imagesNames = {
 };
 
 function Card({
-  cardId, label, pictureName, pairId, isSelected,
+  cardId, label, pictureName, pairId, isSelected, alreadyWon, isInWonList,
 }) {
   const dispatch = useDispatch();
   const handleFirstClickOnCard = () => {
@@ -33,6 +33,14 @@ function Card({
     console.log('cannot reclick sorry');
   };
 
+  const setCardClassName = () => {
+    if (alreadyWon) {
+      return 'Card-itself already-won';
+    }
+
+    return (isSelected) ? 'Card-itself active' : 'Card-itself';
+  };
+
   return (
     <div
       className="Card"
@@ -40,12 +48,12 @@ function Card({
       <div className="Card-container">
 
         <div
-          className={(isSelected) ? 'Card-itself active' : 'Card-itself'}
+          className={setCardClassName()}
           onClick={(isSelected)
             ? () => handleSecondClickOnCard()
             : () => handleFirstClickOnCard(cardId, pairId)}
         >
-          <div className="Card-front">
+          <div className={isInWonList ? 'Card-front isInWonList' : 'Card-front'}>
             <p className="Card-label">{label}</p>
             <p className="Card-id">{cardId}</p>
             <p>The front</p>

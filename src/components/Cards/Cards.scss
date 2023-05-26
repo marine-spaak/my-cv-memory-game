@@ -1,6 +1,6 @@
 @use '../../styles/vars';
 
-.Cards {
+.Cards-playing, .Cards-won {
   display: flex;
   flex-wrap: wrap;
 }

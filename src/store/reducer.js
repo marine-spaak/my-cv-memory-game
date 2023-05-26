@@ -1,5 +1,5 @@
 import {
-  ADD_CARD_TO_SELECTION_LIST, FLIP_ALL_CARDS_TO_BACK_SIDE,
+  ADD_CARD_TO_SELECTION_LIST, ADD_PAIR_TO_WON_LIST, FLIP_ALL_CARDS_TO_BACK_SIDE,
 } from '../actions/actions';
 
 const initialState = {
@@ -7,6 +7,7 @@ const initialState = {
   previousPairId: -1,
   currentPairId: 0,
   hasFoundPair: false,
+  wonPairs: [],
   // hasPickedTwoCards: false,
   // isPickingThirdCard: false,
 };
@@ -24,8 +25,13 @@ function reducer(state = initialState, action = {}) {
         }],
         previousPairId: state.currentPairId,
         currentPairId: action.payload.pairId,
-        // hasPickedTwoCards: (state.selectedCards.length === 1),
-        // isPickingThirdCard: (state.selectedCards.length === 3),
+      };
+
+    case ADD_PAIR_TO_WON_LIST:
+
+      return {
+        ...state,
+        wonPairs: [...state.wonPairs, action.payload.pairId],
       };
 
     case FLIP_ALL_CARDS_TO_BACK_SIDE:
