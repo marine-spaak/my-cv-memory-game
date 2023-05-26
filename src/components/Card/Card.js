@@ -22,6 +22,12 @@ const imagesNames = {
 };
 
 function Card({
+  // Pour l'instant j'ai alreadyWon qui veut dire que :
+  // 1) la carte est sur le plateau principal
+  // 2) elle a été trouvée (donc elle disparait avec un display none)
+
+  // Et le isInWonList signifie qu'on est dans la partie haute,
+  // TODO En fait il faudrait deux composants...
   cardId, label, pictureName, pairId, isSelected, alreadyWon, isInWonList,
 }) {
   const dispatch = useDispatch();
@@ -29,15 +35,19 @@ function Card({
     dispatch(addCardToSelectionList(cardId, pairId));
   };
 
+  // Pour l'instant je n'autorise pas à cliquer 2 fois sur la meme carte
+  // Par exemple, un joueur ne peut pas re-cacher une carte qu'il vient de dévoiler
   const handleSecondClickOnCard = () => {
     console.log('cannot reclick sorry');
   };
 
+  // J'attribue des classes aux cartes qui vont dépendre de la zone où elles se situent
+  // Et de si elles ont été trouvées ou non
+  // Ca me permet uniquement de gérer du CSS
   const setCardClassName = () => {
     if (alreadyWon) {
       return 'Card-itself already-won';
     }
-
     return (isSelected) ? 'Card-itself active' : 'Card-itself';
   };
 
@@ -55,8 +65,6 @@ function Card({
         >
           <div className={isInWonList ? 'Card-front isInWonList' : 'Card-front'}>
             <p className="Card-label">{label}</p>
-            <p className="Card-id">{cardId}</p>
-            <p>The front</p>
           </div>
 
           <div
@@ -69,8 +77,6 @@ function Card({
             }}
           >
             <p className="Card-label">{label}</p>
-            <p className="Card-id">{cardId}</p>
-            The back
           </div>
 
         </div>

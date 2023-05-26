@@ -1,0 +1,18 @@
+@use '../../styles/vars';
+
+.FoundPairs {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  height: 20%;
+}
+
+.FoundPairs-won {
+  border-radius: 10px;
+  padding-top: 1rem;
+  background-color: rgba(229, 152, 155, 0.5);  
+  min-height: 15%;
+  width: 100%;
+  color: #6d6875;
+  font-weight: bold;
+}

@@ -1,14 +1,13 @@
 @use '../../styles/vars';
 
 .Header {
+  height: 10%;
   width: 100%;
   padding: 1rem 0 0 0;
-  // background-color: vars.$dark-color;
-  // color: vars.$light-color;
-  font-size: 1.5rem;
 
   &-title {
     margin-bottom: 2rem;
     font-size: 3rem;
+    color: #6d6875;
   }
 }

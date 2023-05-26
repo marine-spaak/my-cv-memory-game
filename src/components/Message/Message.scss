@@ -1,21 +1,19 @@
 @use '../../styles/vars';
 
 .Message {
-  margin-top: 1rem;
+  border-radius: 10px;
   padding: 1rem;
-  background-color: rgb(241, 255, 219);
-  height: 150px;
+  background-color: #6d6875;
+  color: white;
+  height: 10%;
   display: inline-block;
   justify-content: center;
 
   &-result {
-    margin: auto;
-    background-color: pink;
+    background-color: #e5989b;
+    color: #6d6875;
     padding: 1rem;
-    margin: 1rem 0;
-    width: 100px;
-    border-radius: 20px;
+    border-radius: 5px;
     display: inline-block;
-    justify-content: center;
   }
 }

@@ -1,0 +1,15 @@
+@use '../../styles/vars';
+
+.BoardCards {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  height: 70%;
+}
+
+.BoardCards-playing {
+  height: 80%;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}

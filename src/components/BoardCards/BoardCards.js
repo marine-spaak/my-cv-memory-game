@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
-import './Cards.scss';
+import './BoardCards.scss';
 
 import Card from '../Card/Card';
 import { flipAllCardsToBackSide, addPairToWonList } from '../../actions/actions';
 
-function Cards({ cards }) {
+function BoardCards({ cards }) {
   const dispatch = useDispatch();
 
   // J'importe depuis le state ce dont j'ai besoin
@@ -41,7 +41,7 @@ function Cards({ cards }) {
 
   return (
     <div
-      className="Cards"
+      className="BoardCards"
       onClick={(event) => {
         if (hasPickedTwoCards) {
           // console.log(event);
@@ -50,7 +50,7 @@ function Cards({ cards }) {
       }}
     >
 
-      <div className="Cards-playing">
+      <div className="BoardCards-playing">
         {cards.map((card, index) => (
           <Card
             key={card.id}
@@ -67,33 +67,8 @@ function Cards({ cards }) {
         ))}
       </div>
 
-      {/* J'affiche la liste des paires gagnées */}
-      <div className="Cards-won">
-        {cards
-          .filter(
-            // Je filtre les cartes qui font partie de la liste gagnée
-            (card) => wonPairsFromState.includes(card.pairId),
-          ).sort(
-            // TODO améliorer pour que ce soit trié par ordre de découverte de la paire
-            // Et non par ordre des pairID dans le tableau généré au début
-            (a, b) => a.pairId - b.pairId,
-          ).map((card) => (
-            <Card
-              key={card.id}
-              label={card.label}
-              pictureName={card.pictureName}
-              pictureSrc={card.pictureSrc}
-              cardId={card.id}
-              pairId={card.pairId}
-              isSelected={false}
-              alreadyWon={false}
-              isInWonList
-            />
-          ))}
-      </div>
-
     </div>
   );
 }
 
-export default Cards;
+export default BoardCards;

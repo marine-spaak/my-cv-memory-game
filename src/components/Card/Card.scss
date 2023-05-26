@@ -5,12 +5,12 @@
   
   &-container {
     position: relative;
-    height: 200px;
+    height: 90%;
     margin: 1rem;
     padding: 1rem;
   }
 
-  &-itself, &-front, &-back {
+  &-itself, &-front, &-back, &-isInWonList {
     position: absolute;
     top: 0;
     left: 0;
@@ -26,8 +26,8 @@
 
   &-front {
     backface-visibility: hidden;
-    background-color: rgb(211, 211, 211);
-    color: darkgrey;
+    background-color: #ffcdb2;
+    color: #b5838d;
   }
 
   &-back {
@@ -35,6 +35,7 @@
     background-color: rgba(255, 192, 203, .5);
     color: black;
     transform: rotateX(180deg);
+    box-shadow: 1px 1px 5px 5px rgba(128, 128, 128, .5)
   }
 
   &-label {
@@ -58,6 +59,5 @@
 
 .isInWonList {
   background-color: pink;
-  width: 200px;
-  height: 200px;
+  width: 100px;
 }
