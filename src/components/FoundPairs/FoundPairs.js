@@ -14,6 +14,16 @@ function FoundPairs({ cards }) {
 
   const hasPickedTwoCards = (selectedCardsFromState.length >= 2);
 
+  const sortedArrayOfWinningPairs = cards.filter(
+    // Je filtre les cartes qui font partie de la liste gagnée
+    (card) => wonPairsFromState.includes(card.pairId),
+  ).sort(
+    // TODO améliorer pour que ce soit trié par ordre de découverte de la paire
+    // Et non par ordre des pairID dans le tableau généré au début
+    (a, b) => a.pairId - b.pairId,
+  ).filter((card, index) => (
+    index % 2 === 1));
+
   return (
     <div
       className="FoundPairs"
@@ -25,19 +35,12 @@ function FoundPairs({ cards }) {
       }}
     >
 
-      <p>Voici la liste des paires déjà trouvées : </p>
+      <p className="FoundPairs-header">Voici la liste des paires déjà trouvées : </p>
 
       {/* J'affiche la liste des paires gagnées */}
       <div className="FoundPairs-won">
-        {cards
-          .filter(
-            // Je filtre les cartes qui font partie de la liste gagnée
-            (card) => wonPairsFromState.includes(card.pairId),
-          ).sort(
-            // TODO améliorer pour que ce soit trié par ordre de découverte de la paire
-            // Et non par ordre des pairID dans le tableau généré au début
-            (a, b) => a.pairId - b.pairId,
-          ).map((card) => (
+        {sortedArrayOfWinningPairs
+          .map((card) => (
             <Card
               key={card.id}
               label={card.label}
