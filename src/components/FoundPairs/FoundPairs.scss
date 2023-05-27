@@ -20,7 +20,6 @@
   &-won {
     display: flex;
     flex-direction: row;
-    align-items: baseline;
-    justify-content: flex-start;
+    column-gap: 50px;
   }
 }
