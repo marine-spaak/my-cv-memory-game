@@ -1,0 +1,17 @@
+@use '../../styles/vars';
+
+.MiniCard {
+  display: inline-block;
+  width: 25%;
+
+  &-itself {
+    border-radius: 10px;
+    background-color: vars.$lightest-color;
+    width: 70px;
+    height: 70px;
+  }
+}
+
+.hidden {
+  display: none;
+}

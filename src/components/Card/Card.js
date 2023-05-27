@@ -64,20 +64,21 @@ function Card({
             : () => handleFirstClickOnCard(cardId, pairId)}
         >
           <div className={isInWonList ? 'Card-front isInWonList' : 'Card-front'}>
-            <p className="Card-label">{label}</p>
+            <p className="Card-filigrane">Memory</p>
+            <p className="Card-spoiler">{label}</p>
           </div>
 
           <div
             className="Card-back"
             style={{
-              background: `url(${imagesNames[pictureName]})`,
-              backgroundSize: '90%',
+              backgroundImage: `url(${imagesNames[pictureName]})`,
+              backgroundSize: '100%',
               backgroundRepeat: 'no-repeat',
               backgroundPosition: 'center',
             }}
           >
-            <p className="Card-label">{label}</p>
-          </div>
+            {/* <p className="Card-spoiler">{label}</p> */}
+            </div>
 
         </div>
       </div>

@@ -4,17 +4,17 @@
   margin-top: 1rem;
   display: flex;
   flex-wrap: wrap;
-  height: 20%;
+  height: 15%;
   border-radius: 10px;
   padding: 1rem;
-  background-color: rgba(229, 152, 155, 0.5);  
+  background-color: vars.$alt-color-green;  
   min-height: 15%;
   width: 100%;
-  color: #6d6875;
-  font-weight: bold;
+  color: vars.$dark-color;
 
   &-header {
     width: 100%;
+    font-size: 1.5rem;
   }
 
   &-won {

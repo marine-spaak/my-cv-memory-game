@@ -6,8 +6,7 @@
   &-container {
     position: relative;
     height: 90%;
-    margin: 1rem;
-    padding: 1rem;
+    margin: .7rem;
   }
 
   &-itself, &-front, &-back, &-isInWonList {
@@ -24,22 +23,51 @@
     transition: all 0.5s ease;
   }
 
+  // Le "front" correspond à la première face que l'on voit, quand la carte n'a pas été retournée
+  // Ici c'est donc paradoxalement la "face cachée" de la carte
   &-front {
+    display: flex;
+
+    // TODO remettre ainsi au final
+    // align-items: center;
+    // justify-content: center;
+    // flex-wrap: wrap;
+
+    // Avec le spoiler
+    flex-direction: column;
+
+
     backface-visibility: hidden;
-    background-color: #ffcdb2;
-    color: #b5838d;
+    background-color: vars.$primary-color;
+    color: vars.$lightest-color;
   }
 
   &-back {
     backface-visibility: hidden;
-    background-color: rgba(255, 192, 203, .5);
-    color: black;
     transform: rotateX(180deg);
-    box-shadow: 1px 1px 5px 5px rgba(128, 128, 128, .5)
+    box-shadow: 1px 1px 5px 5px rgba(128, 128, 128, .5);
+    background-color: vars.$lightest-color;
   }
 
-  &-label {
-    margin: .7rem;
+  &-filigrane {
+    font-size: 2rem;    
+    font-family: vars.$title-font;
+    opacity: .3;
+    width: 100%;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+
+  &-spoiler {
+    font-size: 1em;
+    opacity: .2;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
   }
 }
 
@@ -60,6 +88,6 @@
 .isInWonList {
   background-color: pink;
   width: 100px;
-  height: 100px;
+  height: 60px;
   word-wrap: break-word;
 }

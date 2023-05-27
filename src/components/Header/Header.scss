@@ -3,11 +3,11 @@
 .Header {
   height: 10%;
   width: 100%;
-  padding: 1rem 0 0 0;
+  padding: 5rem;
 
   &-title {
-    margin-bottom: 2rem;
-    font-size: 3rem;
-    color: #6d6875;
+    font-family: vars.$title-font;
+    font-size: 3.5rem;
+    color: vars.$primary-color;
   }
 }

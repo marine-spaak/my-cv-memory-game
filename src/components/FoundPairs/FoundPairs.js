@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import './FoundPairs.scss';
 
-import Card from '../Card/Card';
+import MiniCard from '../MiniCard/MiniCard';
 import { flipAllCardsToBackSide } from '../../actions/actions';
 
 function FoundPairs({ cards }) {
@@ -41,7 +41,7 @@ function FoundPairs({ cards }) {
       <div className="FoundPairs-won">
         {sortedArrayOfWinningPairs
           .map((card) => (
-            <Card
+            <MiniCard
               key={card.id}
               label={card.label}
               pictureName={card.pictureName}
