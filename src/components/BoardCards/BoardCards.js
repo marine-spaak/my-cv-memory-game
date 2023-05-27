@@ -6,10 +6,11 @@ import './BoardCards.scss';
 import Card from '../Card/Card';
 import { flipAllCardsToBackSide, addPairToWonList } from '../../actions/actions';
 
-function BoardCards({ cards }) {
+function BoardCards() {
   const dispatch = useDispatch();
 
   // J'importe depuis le state ce dont j'ai besoin
+  const cards = useSelector((state) => state.cards);
   const selectedCardsFromState = useSelector((state) => state.selectedCards);
   const wonPairsFromState = useSelector((state) => state.wonPairs);
   const hasFoundPair = useSelector((state) => state.hasFoundPair);

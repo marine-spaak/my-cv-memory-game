@@ -1,3 +1,9 @@
+export const SAVE_CARDS_INTO_STATE = 'SAVE_CARDS_INTO_STATE';
+export const saveCardsIntoState = (cardsArray) => ({
+  type: SAVE_CARDS_INTO_STATE,
+  payload: cardsArray,
+});
+
 export const ADD_CARD_TO_SELECTION_LIST = 'ADD_CARD_TO_SELECTION_LIST';
 export const addCardToSelectionList = (cardId, pairId) => ({
   type: ADD_CARD_TO_SELECTION_LIST,

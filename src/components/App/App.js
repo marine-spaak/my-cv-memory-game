@@ -1,4 +1,5 @@
 import './App.scss';
+import { useDispatch } from 'react-redux';
 
 import cardsData from '../../assets/data/cardsData';
 
@@ -7,7 +8,12 @@ import Message from '../Message/Message';
 import FoundPairs from '../FoundPairs/FoundPairs';
 import BoardCards from '../BoardCards/BoardCards';
 
+import { saveCardsIntoState } from '../../actions/actions';
+import { useEffect } from 'react';
+
 function App() {
+  const dispatch = useDispatch();
+
   // 🃏🃏 Je crée une paire à partir de chaque modèle de carte
   const doubleCards = [...cardsData, ...cardsData];
 
@@ -23,20 +29,18 @@ function App() {
     }
   ));
 
+  useEffect(() => {
+    dispatch(saveCardsIntoState(shuffledCardsWithId));
+  }, []);
+
   return (
     <div
       className="App"
     >
       <Header />
       <Message />
-      <FoundPairs
-        // 🃏 Le composant "FoundPairs" reçoit la liste des cartes
-        cards={shuffledCardsWithId}
-      />
-      <BoardCards
-        // 🃏 Le composant "Cards" reçoit la liste des cartes
-        cards={shuffledCardsWithId}
-      />
+      <FoundPairs />
+      <BoardCards />
     </div>
   );
 }

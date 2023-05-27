@@ -1,19 +1,28 @@
 import {
-  ADD_CARD_TO_SELECTION_LIST, ADD_PAIR_TO_WON_LIST, FLIP_ALL_CARDS_TO_BACK_SIDE,
+  SAVE_CARDS_INTO_STATE,
+  ADD_CARD_TO_SELECTION_LIST,
+  ADD_PAIR_TO_WON_LIST,
+  FLIP_ALL_CARDS_TO_BACK_SIDE,
 } from '../actions/actions';
 
 const initialState = {
+  cards: [],
   selectedCards: [],
   previousPairId: -1,
   currentPairId: 0,
   hasFoundPair: false,
   wonPairs: [],
-  // hasPickedTwoCards: false,
-  // isPickingThirdCard: false,
 };
 
 function reducer(state = initialState, action = {}) {
   switch (action.type) {
+    case SAVE_CARDS_INTO_STATE:
+
+      return {
+        ...state,
+        cards: action.payload,
+      };
+
     case ADD_CARD_TO_SELECTION_LIST:
 
       return {
@@ -31,7 +40,19 @@ function reducer(state = initialState, action = {}) {
 
       return {
         ...state,
-        wonPairs: [...state.wonPairs, action.payload.pairId],
+        cards: state.cards.map((card) => {
+          if (card.pairId === state.currentPairId) {
+            return {
+              ...card,
+              pairPosition: state.wonPairs.length,
+            };
+          }
+          return card;
+        }),
+        wonPairs: [...state.wonPairs, {
+          // J'utilise des objets qui ont un ID et une position (ordre des trouvailles du joueur)
+          pairId: action.payload.pairId, pairPosition: state.wonPairs.length,
+        }],
       };
 
     case FLIP_ALL_CARDS_TO_BACK_SIDE:
