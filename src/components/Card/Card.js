@@ -26,9 +26,7 @@ function Card({
   // 1) la carte est sur le plateau principal
   // 2) elle a été trouvée (donc elle disparait avec un display none)
 
-  // Et le isInWonList signifie qu'on est dans la partie haute,
-  // TODO En fait il faudrait deux composants...
-  cardId, label, pictureName, pairId, isSelected, alreadyWon, isInWonList,
+  cardId, label, pictureName, pairId, isSelected, alreadyWon,
 }) {
   const dispatch = useDispatch();
   const handleFirstClickOnCard = () => {
@@ -63,9 +61,9 @@ function Card({
             ? () => handleSecondClickOnCard()
             : () => handleFirstClickOnCard(cardId, pairId)}
         >
-          <div className={isInWonList ? 'Card-front isInWonList' : 'Card-front'}>
+          <div className="Card-front">
             <p className="Card-filigrane">Memory</p>
-            <p className="Card-spoiler">{label}</p>
+            {/* <p className="Card-spoiler">{label}</p> */}
           </div>
 
           <div
@@ -78,7 +76,7 @@ function Card({
             }}
           >
             {/* <p className="Card-spoiler">{label}</p> */}
-            </div>
+          </div>
 
         </div>
       </div>

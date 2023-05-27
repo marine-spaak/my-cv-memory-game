@@ -43,16 +43,15 @@ function BoardCards() {
   return (
     <div
       className="BoardCards"
-      onClick={(event) => {
+      onClick={() => {
         if (hasPickedTwoCards) {
-          // console.log(event);
           dispatch(flipAllCardsToBackSide());
         }
       }}
     >
 
       <div className="BoardCards-playing">
-        {cards.map((card, index) => (
+        {cards.map((card) => (
           <Card
             key={card.id}
             label={card.label}
@@ -60,10 +59,8 @@ function BoardCards() {
             pictureSrc={card.pictureSrc}
             cardId={card.id}
             pairId={card.pairId}
-            // TODO check si je garde index ou id ici
-            isSelected={checkIfSelected(index)}
-            alreadyWon={wonPairsFromState.includes(card.pairId)}
-            isInWonList={false}
+            isSelected={checkIfSelected(card.id)}
+            alreadyWon={card.pairPosition !== undefined}
           />
         ))}
       </div>

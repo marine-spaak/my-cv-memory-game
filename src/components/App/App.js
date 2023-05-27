@@ -1,5 +1,6 @@
 import './App.scss';
 import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
 import cardsData from '../../assets/data/cardsData';
 
@@ -9,7 +10,6 @@ import FoundPairs from '../FoundPairs/FoundPairs';
 import BoardCards from '../BoardCards/BoardCards';
 
 import { saveCardsIntoState } from '../../actions/actions';
-import { useEffect } from 'react';
 
 function App() {
   const dispatch = useDispatch();

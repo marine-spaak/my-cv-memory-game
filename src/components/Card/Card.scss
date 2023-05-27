@@ -1,7 +1,8 @@
 @use '../../styles/vars';
 
 .Card {
-  width: 25%;
+  width: 23%;
+  aspect-ratio: 1/1;
   
   &-container {
     position: relative;
@@ -82,7 +83,7 @@
 }
 
 .already-won {
-  display: none;
+  opacity: .5;
 }
 
 .isInWonList {

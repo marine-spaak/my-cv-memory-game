@@ -63,8 +63,6 @@ function reducer(state = initialState, action = {}) {
         previousPairId: -1,
         currentPairId: 0,
         hasFoundPair: false,
-        // hasPickedTwoCards: (state.selectedCards.length === 2),
-        // isPickingThirdCard: (state.selectedCards.length === 3),
       };
 
     default:
