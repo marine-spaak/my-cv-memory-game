@@ -30,7 +30,10 @@ function Card({
 }) {
   const dispatch = useDispatch();
   const handleFirstClickOnCard = () => {
-    dispatch(addCardToSelectionList(cardId, pairId));
+    // Quand une paire a été trouvée, je ne veux plus qu'on puisse cliquer sur la carte
+    if (!alreadyWon) {
+      dispatch(addCardToSelectionList(cardId, pairId));
+    }
   };
 
   // Pour l'instant je n'autorise pas à cliquer 2 fois sur la meme carte
@@ -63,7 +66,7 @@ function Card({
         >
           <div className="Card-front">
             <p className="Card-filigrane">Memory</p>
-            {/* <p className="Card-spoiler">{label}</p> */}
+            <p className="Card-spoiler">{label}</p>
           </div>
 
           <div
