@@ -1,8 +1,11 @@
 import {
   SAVE_CARDS_INTO_STATE,
-  ADD_CARD_TO_SELECTION_LIST,
-  ADD_PAIR_TO_WON_LIST,
+  SELECT_CARD,
+  CONSIDER_AS_WON,
+  UNSELECT_CARDS_FROM_ARRAY_OF_IDS,
+  UPDATE_PAIR_ID,
   FLIP_ALL_CARDS_TO_BACK_SIDE,
+  CLOSE_MODAL,
 } from '../actions/actions';
 
 const initialState = {
@@ -10,9 +13,9 @@ const initialState = {
   selectedCards: [],
   previousPairId: -1,
   currentPairId: 0,
-  hasFoundPair: false,
-  wonPairs: [],
+  numberOfPairsWon: 0,
   playerHasWon: false,
+  isModalActive: false,
 };
 
 function reducer(state = initialState, action = {}) {
@@ -24,42 +27,33 @@ function reducer(state = initialState, action = {}) {
         cards: action.payload,
       };
 
-    case ADD_CARD_TO_SELECTION_LIST:
+    // L'objectif du case "SELECT_CARD"
+    // Est de changer le 'isSelected' de la carte cliquée en 'true'
+    case SELECT_CARD:
 
       return {
         ...state,
-        hasFoundPair: (action.payload.pairId === state.currentPairId),
-        selectedCards: [...state.selectedCards, {
-          id: action.payload.cardId,
-          pairId: action.payload.pairId,
-        }],
-        previousPairId: state.currentPairId,
-        currentPairId: action.payload.pairId,
+        // Dans cards, je trouve la carte cliquée (id stocké en payload)
+        cards: state.cards.map((card) => (
+          (card.id === action.payload)
+
+            // Je change son 'isSelected' en true
+            ? {
+              ...card,
+              isSelected: true,
+            }
+
+            // Si ce n'est pas la bonne carte, je ne change rien
+            : card
+        )),
       };
 
-    case ADD_PAIR_TO_WON_LIST:
+    case UPDATE_PAIR_ID:
 
       return {
         ...state,
-        cards: state.cards.map((card) => {
-          if (card.pairId === state.currentPairId) {
-            return {
-              ...card,
-              pairPosition: state.wonPairs.length,
-            };
-          }
-          return card;
-        }),
-        wonPairs: [...state.wonPairs, {
-          // J'utilise des objets qui ont un ID et une position (ordre des trouvailles du joueur)
-          pairId: action.payload.pairId, pairPosition: state.wonPairs.length,
-        }],
-        // 🥳 SUCCESS
-        // Quand j'ajoute une paire à la liste des gagnées,
-        // Je check si le joueur a tout gagné
-        // Je suis obligée de faire -1 car à ce stade la dernière paire gagnée
-        // n'a pas encore été ajoutée à la liste
-        playerHasWon: ((state.cards.length / 2) - 1 === state.wonPairs.length),
+        previousPairId: state.currentPairId,
+        currentPairId: action.payload,
       };
 
     case FLIP_ALL_CARDS_TO_BACK_SIDE:
@@ -70,6 +64,55 @@ function reducer(state = initialState, action = {}) {
         previousPairId: -1,
         currentPairId: 0,
         hasFoundPair: false,
+      };
+
+    // L'objectif du case "UNSELECT_CARDS_FROM_ARRAY_OF_IDS" est de prendre un tableau,
+    // et de changer le 'isSelected' de toutes les cartes du tableau en 'false'
+    case UNSELECT_CARDS_FROM_ARRAY_OF_IDS:
+
+      return {
+        ...state,
+        // Dans cards, je trouve la carte cliquée (id stocké en payload)
+        cards: state.cards.map((card) => (
+          (action.payload.includes(card.id))
+            // Je change son 'isSelected' en false
+            ? {
+              ...card,
+              isSelected: false,
+            }
+            : card
+        )),
+      };
+
+    // L'objectif du case "CONSIDER_AS_WON" est de prendre un tableau d'IDs,
+    // et de changer le 'isWon' de toutes les cartes du tableau en 'true'
+    case CONSIDER_AS_WON:
+      return {
+        ...state,
+        cards: state.cards.map((card) => (
+          (action.payload.includes(card.id))
+            ? {
+              ...card,
+              isWon: true,
+              pairPosition: state.numberOfPairsWon,
+            }
+            : card
+        )),
+        numberOfPairsWon: state.numberOfPairsWon + 1,
+        isModalActive: true,
+
+        // 🥳 SUCCESS
+        // Quand je gagne une paire supplémentaire,
+        // Je check si le joueur a tout gagné
+        // Je suis obligée de faire -1 car à ce stade la dernière paire gagnée
+        // n'a pas encore été ajoutée à la liste
+        playerHasWon: ((state.cards.length / 2) - 1 === state.numberOfPairsWon),
+      };
+
+    case CLOSE_MODAL:
+      return {
+        ...state,
+        isModalActive: false,
       };
 
     default:

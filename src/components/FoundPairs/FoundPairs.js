@@ -10,10 +10,10 @@ function FoundPairs() {
 
   const sortedArrayOfWinningPairs = cards.filter(
     // Je filtre les cartes qui font partie de la liste gagnée
-    (card) => (card.pairPosition !== undefined),
+    (card) => (card.isWon),
   ).sort(
-    // TODO améliorer pour que ce soit trié par ordre de découverte de la paire
-    // Et non par ordre des pairID dans le tableau généré au début
+    // Je trie les paires par ordre de découverte de la paire
+    // (et non par ordre des pairID dans le tableau généré au début)
     (a, b) => a.pairPosition - b.pairPosition,
   ).filter((card, index) => (
     index % 2 === 1));

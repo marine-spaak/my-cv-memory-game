@@ -82,8 +82,15 @@
   max-height: 60%;
 }
 
-.already-won {
-  opacity: .5;
+.won {
+  transform: rotateX(180deg);
+  & .Card-front {
+    display: none;
+  }
+  & .Card-back {
+    opacity: .5;
+    transition: opacity 1s ease;
+  }
 }
 
 .isInWonList {

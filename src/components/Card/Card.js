@@ -1,5 +1,7 @@
 import { useDispatch } from 'react-redux';
 
+import PropTypes from 'prop-types';
+
 import './Card.scss';
 
 // Import des images
@@ -10,7 +12,7 @@ import picturePair4 from 'src/assets/pictures/pair-picture-4.png';
 import picturePair5 from 'src/assets/pictures/pair-picture-5.png';
 import picturePair6 from 'src/assets/pictures/pair-picture-6.png';
 
-import { addCardToSelectionList } from '../../actions/actions';
+import { selectCard, updatePairId } from '../../actions/actions';
 
 const imagesNames = {
   picturePair1,
@@ -21,33 +23,34 @@ const imagesNames = {
   picturePair6,
 };
 
-function Card({
-  // Pour l'instant j'ai alreadyWon qui veut dire que :
-  // 1) la carte est sur le plateau principal
-  // 2) elle a été trouvée (donc elle disparait avec un display none)
+// L'objectif est d'avoir une prop "isSelected" qui dira pour chaque carte
+// si elle est en cours de sélection (donc face visible) - ou non
 
-  cardId, label, pictureName, pairId, isSelected, alreadyWon,
+// Et également une prop "isWon" qui dirait si elle a été gagnée
+// (modification de son affichage également - par exemple en opacité réduite)
+function Card({
+  cardId, pairId, label, pictureName, isSelected, isWon,
 }) {
   const dispatch = useDispatch();
-  const handleFirstClickOnCard = () => {
-    // Quand une paire a été trouvée, je ne veux plus qu'on puisse cliquer sur la carte
-    if (!alreadyWon) {
-      dispatch(addCardToSelectionList(cardId, pairId));
+
+  // Ce handler est appelé chaque fois qu'on clique sur une carte
+  const handleClickOnCard = () => {
+    if (isWon) {
+      console.log ('cette carte a déjà été gagnée');
+    }
+
+    if (!isWon && !isSelected) {
+      dispatch(selectCard(cardId));
+      dispatch(updatePairId(pairId));
     }
   };
 
-  // Pour l'instant je n'autorise pas à cliquer 2 fois sur la meme carte
-  // Par exemple, un joueur ne peut pas re-cacher une carte qu'il vient de dévoiler
-  const handleSecondClickOnCard = () => {
-    console.log('cannot reclick sorry');
-  };
-
-  // J'attribue des classes aux cartes qui vont dépendre de la zone où elles se situent
-  // Et de si elles ont été trouvées ou non
-  // Ca me permet uniquement de gérer du CSS
+  // La fonction suivante permet de définir la classe de la carte selon son statut
+  // (cliquée, non cliquée, gagnée etc)
+  // Cela servira à appliquer du CSS uniquement
   const setCardClassName = () => {
-    if (alreadyWon) {
-      return 'Card-itself already-won';
+    if (isWon) {
+      return 'Card-itself won';
     }
     return (isSelected) ? 'Card-itself active' : 'Card-itself';
   };
@@ -60,13 +63,11 @@ function Card({
 
         <div
           className={setCardClassName()}
-          onClick={(isSelected)
-            ? () => handleSecondClickOnCard()
-            : () => handleFirstClickOnCard(cardId, pairId)}
+          onClick={() => handleClickOnCard()}
         >
           <div className="Card-front">
             <p className="Card-filigrane">Memory</p>
-            <p className="Card-spoiler">{label}</p>
+            {/* <p className="Card-spoiler">{label}</p> */}
           </div>
 
           <div
@@ -77,14 +78,21 @@ function Card({
               backgroundRepeat: 'no-repeat',
               backgroundPosition: 'center',
             }}
-          >
-            {/* <p className="Card-spoiler">{label}</p> */}
-          </div>
+          />
 
         </div>
       </div>
     </div>
   );
 }
+
+Card.propTypes = {
+  cardId: PropTypes.number.isRequired,
+  pairId: PropTypes.number.isRequired,
+  label: PropTypes.string.isRequired,
+  pictureName: PropTypes.string.isRequired,
+  isSelected: PropTypes.bool.isRequired,
+  isWon: PropTypes.bool.isRequired,
+};
 
 export default Card;

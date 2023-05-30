@@ -6,6 +6,7 @@ import cardsData from '../../assets/data/cardsData';
 
 import Header from '../Header/Header';
 import Message from '../Message/Message';
+import InfoModal from '../InfoModal/InfoModal';
 import FoundPairs from '../FoundPairs/FoundPairs';
 import BoardCards from '../BoardCards/BoardCards';
 
@@ -39,6 +40,7 @@ function App() {
     >
       <Header />
       <Message />
+      <InfoModal />
       <FoundPairs />
       <BoardCards />
     </div>
